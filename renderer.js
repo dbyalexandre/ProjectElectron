@@ -1,8 +1,14 @@
-const file = document.getElementById('chooseFile')
+const file = document.querySelector('.btn')
 
-function chooseFile() {
-  alert("test")
-}
+file.addEventListener('click', (e) => {
+  dialog.showOpenDialog({
+    properties: ['openFile', 'multiSelections']
+  }, (files) => {
+    if (!files) {
+
+    } 
+  })
+})
   // document.file.addEventListener('click', function() {
   //   dialog.showOpenDialog({
   //     properties: ['openFile']
