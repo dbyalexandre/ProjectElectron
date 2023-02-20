@@ -1,5 +1,3 @@
-import { dialog } from 'electron'
-
 const file = document.getElementById('chooseFile')
 
 function chooseFile() {
