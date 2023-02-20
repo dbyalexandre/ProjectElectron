@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, ipcMain} = require('electron')
+const {app, BrowserWindow, ipcMain, dialog} = require('electron')
 const path = require('path')
 
 function createWindow () {
@@ -30,7 +30,13 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
   
-  ipcMain.on("test", () => console.log("test"))
+  ipcMain.on('compress-images', async () => {
+    const { filePaths } = await dialog.showOpenDialog({
+      properties: ["openFile", "multiSelections"],
+      filters: [{name: "Images", extensions: ["png"]}]
+    })
+    console.log(filePaths)
+  })
 
 })
 
@@ -43,13 +49,3 @@ app.on('window-all-closed', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-
-document.querySelector('.btn').addEventListener('click', (e) => {
-  dialog.showOpenDialog({
-    properties: ['openFile', 'multiSelections']
-  }, (files) => {
-    if (!files) {
-      
-    } 
-  })
-})

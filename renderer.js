@@ -1,14 +1,5 @@
-const file = document.getElementById('chooseFile')
+const file = document.querySelector('.btn')
 
-function chooseFile() {
-  alert("test")
-}
-  // document.file.addEventListener('click', function() {
-  //   dialog.showOpenDialog({
-  //     properties: ['openFile']
-  //   }, function(files) {
-  //     if (files) {
-  //       console.log(`Fichier sélectionné : ${files[0]}`)
-  //     }
-  //   })
-  // })
+file.addEventListener('click', () => {
+  window.electronAPI.compressImages()
+})
