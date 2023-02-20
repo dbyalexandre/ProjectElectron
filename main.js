@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, ipcMain, dialog} = require('electron')
+const {app, BrowserWindow, ipcMain, dialog, nativeTheme} = require('electron')
 const path = require('path')
 
 function createWindow () {
@@ -12,8 +12,22 @@ function createWindow () {
     }
   })
 
+  mainWindow.maximize()
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
+
+  ipcMain.handle('dark-mode:toggle', () => {
+    if(nativeTheme.shouldUseDarkColors) {
+      nativeTheme.themeSource = 'light'
+    } else {
+      nativeTheme.themeSource = 'dark'
+    }
+    return nativeTheme.shouldUseDarkColors
+  })
+
+  ipcMain.handle('dark-mode:system', () => {
+    nativeTheme.themeSource = 'system'
+  })
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
