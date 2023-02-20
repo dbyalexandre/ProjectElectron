@@ -1,6 +1,6 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
-const path = require('path')
+import {app, BrowserWindow, dialog} from 'electron'
+import path from 'path'
 
 function createWindow () {
   // Create the browser window.
@@ -41,3 +41,13 @@ app.on('window-all-closed', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+document.querySelector('.btn').addEventListener('click', (e) => {
+  dialog.showOpenDialog({
+    properties: ['openFile', 'multiSelections']
+  }, (files) => {
+    if (!files) {
+      
+    } 
+  })
+})
